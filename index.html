@@ -112,35 +112,21 @@
             background: #d4edda;
         }
         
-        .loading {
+        .info-box {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .footer {
             text-align: center;
-            padding: 50px;
-            font-size: 1.5em;
+            margin-top: 30px;
             color: #666;
-        }
-        
-        .error {
-            text-align: center;
-            padding: 50px;
-            color: red;
-        }
-        
-        .refresh-btn {
-            display: block;
-            margin: 20px auto;
-            padding: 12px 30px;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .refresh-btn:hover {
-            background: #764ba2;
-            transform: scale(1.05);
+            padding: 20px;
+            border-top: 1px solid #ddd;
         }
     </style>
 </head>
@@ -148,185 +134,160 @@
     <div class="container">
         <h1>🎯 AI-Powered Arbitrage Detection System</h1>
         
-        <div id="loading" class="loading">Loading arbitrage opportunities...</div>
-        <div id="error" class="error" style="display: none;"></div>
-        <div id="content" style="display: none;">
-            <button class="refresh-btn" onclick="loadData()">🔄 Refresh Data</button>
-            
-            <div class="metrics">
-                <div class="metric-card">
-                    <div class="metric-label">Total Opportunities</div>
-                    <div class="metric-value" id="total-opp">0</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-label">Avg Arbitrage</div>
-                    <div class="metric-value" id="avg-arb">0%</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-label">Max Arbitrage</div>
-                    <div class="metric-value" id="max-arb">0%</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-label">Total Profit</div>
-                    <div class="metric-value" id="total-profit">$0</div>
-                </div>
+        <div class="info-box">
+            <strong>📊 Live Demo Data</strong> - This dashboard shows sample arbitrage opportunities detected across prediction markets.
+        </div>
+        
+        <div class="metrics">
+            <div class="metric-card">
+                <div class="metric-label">Total Opportunities</div>
+                <div class="metric-value" id="total-opp">5</div>
             </div>
-            
-            <div class="charts">
-                <div class="chart-container">
-                    <h3>📈 Arbitrage by Market</h3>
-                    <canvas id="barChart"></canvas>
-                </div>
-                <div class="chart-container">
-                    <h3>💰 Profit Distribution</h3>
-                    <canvas id="pieChart"></canvas>
-                </div>
+            <div class="metric-card">
+                <div class="metric-label">Avg Arbitrage</div>
+                <div class="metric-value" id="avg-arb">75.34%</div>
             </div>
-            
-            <h3>📋 Detailed Opportunities</h3>
-            <table id="opportunities-table">
-                <thead>
-                    <tr>
-                        <th>Market</th>
-                        <th>Arbitrage</th>
-                        <th>ROI</th>
-                        <th>Risk</th>
-                        <th>Platform 1</th>
-                        <th>Platform 2</th>
-                        <th>Profit</th>
-                    </tr>
-                </thead>
-                <tbody id="table-body">
-                </tbody>
-            </table>
+            <div class="metric-card">
+                <div class="metric-label">Max Arbitrage</div>
+                <div class="metric-value" id="max-arb">103.49%</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Total Profit</div>
+                <div class="metric-value" id="total-profit">$1,245.10</div>
+            </div>
+        </div>
+        
+        <div class="charts">
+            <div class="chart-container">
+                <h3>📈 Arbitrage by Market</h3>
+                <canvas id="barChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>💰 Profit Distribution</h3>
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
+        
+        <h3>📋 Detailed Opportunities</h3>
+        <table id="opportunities-table">
+            <thead>
+                <tr>
+                    <th>Market</th>
+                    <th>Arbitrage</th>
+                    <th>ROI</th>
+                    <th>Risk</th>
+                    <th>Platform 1</th>
+                    <th>Platform 2</th>
+                    <th>Profit</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+            </tbody>
+        </table>
+        
+        <div class="footer">
+            <p>🏆 AI-Powered Arbitrage Detection System | ZerveHack Submission</p>
+            <p>Built with ❤️ using Python, Machine Learning, and Web Technologies</p>
+            <p><a href="https://github.com/Vikram-Bosak/zerve-arbitrage-system" target="_blank">View on GitHub</a></p>
         </div>
     </div>
     
     <script>
-        let barChart, pieChart;
+        // Sample data (embedded directly for GitHub Pages)
+        const data = {
+            market: [
+                'Politics Arbitrage Event 10',
+                'Sports Arbitrage Event 4',
+                'Politics Arbitrage Event 2',
+                'Finance Arbitrage Event 5',
+                'Technology Arbitrage Event 7'
+            ],
+            arbitrage: [75.91, 66.91, 103.49, 58.23, 72.15],
+            roi: [27.03, 24.57, 24.62, 21.89, 26.45],
+            risk_level: ['HIGH', 'HIGH', 'HIGH', 'MEDIUM', 'HIGH'],
+            platform1: ['Polymarket', 'Kalshi', 'Polymarket', 'Metaculus', 'Manifold'],
+            platform2: ['Kalshi', 'Polymarket', 'Metaculus', 'Polymarket', 'Kalshi'],
+            profit: [270.30, 245.70, 246.20, 218.90, 264.50]
+        };
         
-        async function loadData() {
-            const loading = document.getElementById('loading');
-            const error = document.getElementById('error');
-            const content = document.getElementById('content');
-            
-            loading.style.display = 'block';
-            error.style.display = 'none';
-            content.style.display = 'none';
-            
-            try {
-                const response = await fetch('/api/opportunities');
-                const result = await response.json();
-                
-                if (result.status === 'success') {
-                    displayData(result);
-                    loading.style.display = 'none';
-                    content.style.display = 'block';
-                } else {
-                    throw new Error('Failed to load data');
-                }
-            } catch (err) {
-                loading.style.display = 'none';
-                error.style.display = 'block';
-                error.textContent = 'Error loading data: ' + err.message;
-            }
-        }
+        // Calculate metrics
+        const metrics = {
+            total_opportunities: data.market.length,
+            avg_arbitrage: data.arbitrage.reduce((a, b) => a + b, 0) / data.arbitrage.length,
+            max_arbitrage: Math.max(...data.arbitrage),
+            total_profit: data.profit.reduce((a, b) => a + b, 0)
+        };
         
-        function displayData(result) {
-            const data = result.data;
-            const metrics = result.metrics;
-            
-            // Update metrics
-            document.getElementById('total-opp').textContent = metrics.total_opportunities;
-            document.getElementById('avg-arb').textContent = metrics.avg_arbitrage.toFixed(2) + '%';
-            document.getElementById('max-arb').textContent = metrics.max_arbitrage.toFixed(2) + '%';
-            document.getElementById('total-profit').textContent = '$' + metrics.total_profit.toFixed(2);
-            
-            // Update table
-            const tbody = document.getElementById('table-body');
-            tbody.innerHTML = '';
-            
-            data.market.forEach((market, i) => {
-                const row = document.createElement('tr');
-                row.className = 'risk-' + data.risk_level[i];
-                row.innerHTML = `
-                    <td>${market}</td>
-                    <td>${data.arbitrage[i].toFixed(2)}%</td>
-                    <td>${data.roi[i].toFixed(2)}%</td>
-                    <td>${data.risk_level[i]}</td>
-                    <td>${data.platform1[i]}</td>
-                    <td>${data.platform2[i]}</td>
-                    <td>$${data.profit[i].toFixed(2)}</td>
-                `;
-                tbody.appendChild(row);
-            });
-            
-            // Update charts
-            updateCharts(data);
-        }
+        // Update metrics display
+        document.getElementById('total-opp').textContent = metrics.total_opportunities;
+        document.getElementById('avg-arb').textContent = metrics.avg_arbitrage.toFixed(2) + '%';
+        document.getElementById('max-arb').textContent = metrics.max_arbitrage.toFixed(2) + '%';
+        document.getElementById('total-profit').textContent = '$' + metrics.total_profit.toFixed(2);
         
-        function updateCharts(data) {
-            // Bar Chart
-            const barCtx = document.getElementById('barChart').getContext('2d');
-            
-            if (barChart) {
-                barChart.destroy();
-            }
-            
-            barChart = new Chart(barCtx, {
-                type: 'bar',
-                data: {
-                    labels: data.market,
-                    datasets: [{
-                        label: 'Arbitrage %',
-                        data: data.arbitrage,
-                        backgroundColor: data.risk_level.map(risk => 
-                            risk === 'HIGH' ? 'rgba(255, 99, 132, 0.8)' :
-                            risk === 'MEDIUM' ? 'rgba(255, 206, 86, 0.8)' :
-                            'rgba(75, 192, 192, 0.8)'
-                        )
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
+        // Update table
+        const tbody = document.getElementById('table-body');
+        data.market.forEach((market, i) => {
+            const row = document.createElement('tr');
+            row.className = 'risk-' + data.risk_level[i];
+            row.innerHTML = `
+                <td>${market}</td>
+                <td>${data.arbitrage[i].toFixed(2)}%</td>
+                <td>${data.roi[i].toFixed(2)}%</td>
+                <td>${data.risk_level[i]}</td>
+                <td>${data.platform1[i]}</td>
+                <td>${data.platform2[i]}</td>
+                <td>$${data.profit[i].toFixed(2)}</td>
+            `;
+            tbody.appendChild(row);
+        });
+        
+        // Bar Chart
+        const barCtx = document.getElementById('barChart').getContext('2d');
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: data.market,
+                datasets: [{
+                    label: 'Arbitrage %',
+                    data: data.arbitrage,
+                    backgroundColor: data.risk_level.map(risk => 
+                        risk === 'HIGH' ? 'rgba(255, 99, 132, 0.8)' :
+                        risk === 'MEDIUM' ? 'rgba(255, 206, 86, 0.8)' :
+                        'rgba(75, 192, 192, 0.8)'
+                    )
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
                     }
                 }
-            });
-            
-            // Pie Chart
-            const pieCtx = document.getElementById('pieChart').getContext('2d');
-            
-            if (pieChart) {
-                pieChart.destroy();
             }
-            
-            pieChart = new Chart(pieCtx, {
-                type: 'pie',
-                data: {
-                    labels: data.market,
-                    datasets: [{
-                        data: data.profit,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.8)',
-                            'rgba(54, 162, 235, 0.8)',
-                            'rgba(255, 206, 86, 0.8)',
-                            'rgba(75, 192, 192, 0.8)',
-                            'rgba(153, 102, 255, 0.8)'
-                        ]
-                    }]
-                },
-                options: {
-                    responsive: true
-                }
-            });
-        }
+        });
         
-        // Load data on page load
-        loadData();
+        // Pie Chart
+        const pieCtx = document.getElementById('pieChart').getContext('2d');
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: data.market,
+                datasets: [{
+                    data: data.profit,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
     </script>
 </body>
 </html>
